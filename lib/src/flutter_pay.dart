@@ -6,8 +6,7 @@ class FlutterPay {
   /// Switch Google Pay [environment]
   ///
   /// See [PaymentEnvironment]
-  void setEnvironment(
-      {PaymentEnvironment environment = PaymentEnvironment.Test}) {
+  void setEnvironment({PaymentEnvironment environment = PaymentEnvironment.Test}) {
     var params = <String, bool>{
       "isTestEnvironment": environment == PaymentEnvironment.Test,
     };
@@ -24,14 +23,11 @@ class FlutterPay {
   ///
   /// You can set allowed payment networks in [allowedPaymentNetworks] parameter.
   /// See [PaymentNetwork]
-  Future<bool> canMakePaymentsWithActiveCard(
-      {required List<PaymentNetwork> allowedPaymentNetworks}) async {
-    var paymentNetworks =
-        allowedPaymentNetworks.map((network) => network.getName).toList();
+  Future<bool> canMakePaymentsWithActiveCard({required List<PaymentNetwork> allowedPaymentNetworks}) async {
+    var paymentNetworks = allowedPaymentNetworks.map((network) => network.getName).toList();
     var params = <String, dynamic>{"paymentNetworks": paymentNetworks};
 
-    final canMakePayments =
-        await _channel.invokeMethod('canMakePaymentsWithActiveCard', params);
+    final canMakePayments = await _channel.invokeMethod('canMakePaymentsWithActiveCard', params);
     return canMakePayments;
   }
 
@@ -61,8 +57,8 @@ class FlutterPay {
     var params = <String, dynamic>{
       "currencyCode": currencyCode,
       "countryCode": countryCode,
-      "allowedPaymentNetworks":
-          allowedPaymentNetworks.map((network) => network.getName).toList(),
+      "allowedPaymentNetworks": allowedPaymentNetworks.map((network) => network.getName).toList(),
+      "allowedAuthMethods": [],
       "items": items,
       "emailRequired": emailRequired,
     };

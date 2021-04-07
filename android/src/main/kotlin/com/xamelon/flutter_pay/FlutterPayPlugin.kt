@@ -191,10 +191,6 @@ class FlutterPayPlugin : FlutterPlugin, MethodCallHandler, PluginRegistry.Activi
         }
         print("requestPayment, authMethods: ${authMethods}\n")
 
-        if (totalPrice <= 0.0) {
-            this.lastResult?.error("zeroPrice", "Invalid price", "Total price cannot be zero or less than zero")
-            return
-        }
         if (gatewayName == null || gatewayMerchantID == null || currencyCode == null || countryCode == null) {
             this.lastResult?.error("invalidParameters", "Invalid parameters", "Invalid parameters")
             return
